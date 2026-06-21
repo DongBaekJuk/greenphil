@@ -178,10 +178,39 @@ h2 {
   padding: 20px;
 }
 
-.auth-panel,
+.left-stack,
 .side-stack {
   position: sticky;
   top: 20px;
+}
+
+.left-stack {
+  display: grid;
+  gap: 16px;
+}
+
+.community-link-panel {
+  display: grid;
+  gap: 12px;
+  background: #bababa;
+}
+
+.community-link-panel a {
+  display: block;
+  padding: 14px 16px;
+  color: var(--ink);
+  text-decoration: none;
+  border: 1px solid rgba(23, 33, 27, 0.14);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.48);
+  font-weight: 900;
+}
+
+.community-link-panel a:hover,
+.community-link-panel a:focus-visible {
+  background: rgba(255, 255, 255, 0.72);
+  outline: 3px solid rgba(47, 122, 77, 0.22);
+  outline-offset: 2px;
 }
 
 .profile-card {
@@ -225,6 +254,17 @@ h2 {
 
 .auth-buttons button {
   flex: 1;
+}
+
+.auth-message {
+  margin: -4px 0 14px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.auth-message.error {
+  color: var(--coral);
 }
 
 .mini-stats {
@@ -702,9 +742,11 @@ h2 {
     grid-template-columns: minmax(0, 1fr) 340px;
   }
 
-  .auth-panel {
+  .left-stack {
     position: static;
     grid-column: 1 / -1;
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 0.6fr);
+    align-items: stretch;
   }
 
   .auth-panel {
@@ -731,6 +773,7 @@ h2 {
 
   .topbar,
   .layout-grid,
+  .left-stack,
   .auth-panel,
   .comment-form {
     grid-template-columns: 1fr;
