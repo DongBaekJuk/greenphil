@@ -58,6 +58,7 @@ button {
   font-weight: 800;
   line-height: 1;
   letter-spacing: 0.02em;
+  text-decoration: none;
 }
 
 .profile-trigger {
@@ -70,6 +71,7 @@ button {
   border-radius: 50%;
   background: #d7d7db;
   flex-shrink: 0;
+  text-decoration: none;
 }
 
 .profile-trigger-circle {
@@ -110,6 +112,8 @@ h2 {
 .auth-buttons,
 .post-footer,
 .tab-row,
+.sort-tabs,
+.modal-action-buttons,
 .modal-actions {
   display: flex;
   align-items: center;
@@ -123,6 +127,8 @@ h2 {
 .icon-button,
 .auth-buttons button,
 .tab-row button,
+.tab-row a,
+.sort-tabs button,
 .comment-form button,
 .dawn-toggle {
   border: 0;
@@ -142,6 +148,8 @@ h2 {
 .ghost-button,
 .auth-buttons button,
 .tab-row button,
+.tab-row a,
+.sort-tabs button,
 .text-button {
   background: rgba(255, 255, 255, 0.76);
   color: var(--green-deep);
@@ -153,6 +161,8 @@ h2 {
 .heart-button:hover,
 .auth-buttons button:hover,
 .tab-row button:hover,
+.tab-row a:hover,
+.sort-tabs button:hover,
 .comment-form button:hover,
 .dawn-toggle:hover {
   transform: translateY(-1px);
@@ -204,6 +214,11 @@ h2 {
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.48);
   font-weight: 900;
+}
+
+.community-link-panel a.active {
+  background: rgba(255, 255, 255, 0.86);
+  outline: 3px solid rgba(47, 122, 77, 0.2);
 }
 
 .community-link-panel a:hover,
@@ -289,6 +304,36 @@ h2 {
   margin-bottom: 16px;
 }
 
+.feed-heading {
+  align-items: flex-start;
+}
+
+.feed-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.sort-tabs {
+  padding: 6px;
+  border-radius: 999px;
+  background: #eef4eb;
+  border: 1px solid var(--line);
+}
+
+.sort-tabs button {
+  min-height: 34px;
+  padding: 0 12px;
+  font-size: 13px;
+}
+
+.sort-tabs button.active {
+  background: white;
+  color: var(--green-deep);
+  box-shadow: 0 8px 20px rgba(38, 72, 48, 0.09);
+}
+
 .section-heading.compact {
   margin-bottom: 14px;
 }
@@ -322,6 +367,18 @@ h2 {
 .side-stack {
   display: grid;
   gap: 16px;
+}
+
+.feed-notice,
+.inline-error,
+.empty-state {
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.inline-error {
+  color: var(--coral);
 }
 
 .post-card {
@@ -455,16 +512,36 @@ h2 {
   background: #eef4eb;
 }
 
-.tab-row button {
+.tab-row button,
+.tab-row a {
   flex: 1;
   min-height: 36px;
   background: transparent;
   border-color: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--green-deep);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 800;
 }
 
-.tab-row button.active {
+.tab-row button.active,
+.tab-row a.active {
   background: white;
   box-shadow: 0 8px 20px rgba(38, 72, 48, 0.09);
+}
+
+.tab-row.stacked {
+  display: grid;
+  gap: 8px;
+  border-radius: 20px;
+}
+
+.tab-row.stacked a {
+  justify-content: flex-start;
+  padding: 0 14px;
 }
 
 .activity-list {
@@ -652,6 +729,14 @@ h2 {
   padding-top: 4px;
 }
 
+.modal-action-buttons {
+  margin-left: auto;
+}
+
+.composer-mode {
+  justify-self: start;
+}
+
 .detail-content {
   color: #344238;
   font-size: 18px;
@@ -737,6 +822,131 @@ h2 {
   box-shadow: 0 24px 46px rgba(33, 88, 56, 0.4);
 }
 
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 18px;
+  padding: 14px 0 0;
+  border-top: 1px solid var(--line);
+}
+
+.pagination > span {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.pagination div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.pagination button,
+.pagination-ellipsis {
+  display: inline-grid;
+  min-width: 36px;
+  min-height: 36px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: white;
+  color: var(--green-deep);
+  font-weight: 900;
+}
+
+.pagination button.active {
+  background: var(--green);
+  color: white;
+  border-color: var(--green);
+}
+
+.pagination-ellipsis {
+  background: transparent;
+  border-color: transparent;
+  color: var(--muted);
+}
+
+.placeholder-page,
+.my-page {
+  display: grid;
+  gap: 16px;
+}
+
+.my-profile-summary {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.my-profile-summary strong,
+.my-profile-summary span {
+  display: block;
+}
+
+.my-profile-summary span {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.avatar.large {
+  width: 66px;
+  height: 66px;
+  border-radius: 22px;
+}
+
+.my-page-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.my-page-tabs a {
+  min-height: 38px;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: white;
+  color: var(--green-deep);
+  text-decoration: none;
+  font-weight: 900;
+}
+
+.my-activity-list {
+  display: grid;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.my-activity-list li {
+  display: grid;
+  gap: 6px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.my-activity-list span {
+  color: #344238;
+  line-height: 1.5;
+}
+
+.my-activity-list strong {
+  color: var(--green-deep);
+  font-size: 13px;
+}
+
 @media (max-width: 1120px) {
   .layout-grid {
     grid-template-columns: minmax(0, 1fr) 340px;
@@ -802,6 +1012,17 @@ h2 {
     flex-direction: column;
   }
 
+  .feed-controls,
+  .pagination {
+    width: 100%;
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .pagination div {
+    justify-content: flex-start;
+  }
+
   .profile-trigger {
     width: 84px;
     height: 84px;
@@ -826,6 +1047,7 @@ h2 {
   .top-actions,
   .auth-buttons,
   .post-footer,
+  .modal-action-buttons,
   .modal-actions {
     align-items: stretch;
     flex-direction: column;
